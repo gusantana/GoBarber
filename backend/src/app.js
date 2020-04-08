@@ -1,10 +1,15 @@
-import express from 'express';
-import routes from './routes';
+import express from "express";
+import routes from "./routes";
+import path from "path";
 
-import './database';
+import "./database";
 
 const app = express();
 app.use(express.json());
+app.use(
+    "/files",
+    express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
+);
 app.use(routes);
 
 export default app;
