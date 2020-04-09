@@ -1,5 +1,5 @@
 import { startOfHour, parseISO, isBefore, format } from "date-fns";
-import pt from 'date-fns/locale/pt';
+import pt from "date-fns/locale/pt";
 import Appointment from "../models/Appointment";
 import User from "../models/User";
 import File from "../models/File";
@@ -31,6 +31,7 @@ module.exports = {
         });
         return res.json(appointments);
     },
+
     async store(req, res) {
         const schema = Yup.object().shape({
             provider_id: Yup.number().required(),
@@ -50,6 +51,12 @@ module.exports = {
         if (!isProvider) {
             return res.status(401).json({
                 error: "You can only create appointments with providers.",
+            });
+        }
+
+        if (provider_id == req.userId) {
+            return res.status(401).json({
+                error: "You cannot create an appointment with yourself.",
             });
         }
 
@@ -93,17 +100,16 @@ module.exports = {
         const user = await User.findByPk(req.userId);
         const formattedDate = format(
             hourStart,
-            "'dia' dd 'de' MMMM', às' H:mm'h'",
+            "'dia' dd 'de' MMMM', às' HH:mm'h'",
             {
-                locale: pt
+                locale: pt,
             }
         );
 
         await Notification.create({
             content: `Novo agendamento de ${user.name} para ${formattedDate}`,
-            user: provider_id
+            user: provider_id,
         });
-
 
         return res.json(appointment);
     },
