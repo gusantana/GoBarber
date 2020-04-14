@@ -1,10 +1,10 @@
 export default {
-    host: "smtp.mailtrap.io",
-    port: "2525",
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
     secure: false,
     auth: {
-        user: "f192f3df2b8b9a",
-        pass: "af36e77ae7d3f1",
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
     },
     default: {
         from: "Equipe Lotus <noreply@lotus.com.br>",

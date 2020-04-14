@@ -1,3 +1,5 @@
+require("dotenvt/config");
+
 module.exports = {
     development: {
         dialect: "sqlite",

@@ -27,14 +27,11 @@ class Database {
     }
 
     mongo() {
-        this.mongoConnection = mongoose.connect(
-            "mongodb+srv://gustavo:mjpq282@lotus-x5ec7.mongodb.net/gobarber?retryWrites=true&w=majority",
-            {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                useFindAndModify: true
-            }
-        );
+        this.mongoConnection = mongoose.connect(process.env.MONGO_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useFindAndModify: true,
+        });
     }
 }
 
