@@ -30,6 +30,13 @@ module.exports = {
                     ],
                 },
             },
+            include: [
+                {
+                    model:User,
+                    as: 'user',
+                    attributes: ['name']
+                }
+            ],
             order: ['date']
         });
 
