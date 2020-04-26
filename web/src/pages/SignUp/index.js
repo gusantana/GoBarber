@@ -21,7 +21,7 @@ export default function SignUp() {
 	const dispatch = useDispatch();
 
 	function handleSubmit({ name, email, password }) {
-		dispatch(signUpRequest({ name, email, password }));
+		dispatch(signUpRequest(name, email, password));
 	}
 
 	return (
